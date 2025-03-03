@@ -1,0 +1,33 @@
+Ci sono alcune cose da ricordare.
+1. La descrizione inizia con la parola chiave module e
+termina con la parola chiave endmodule (endmodule senza virgola).
+2. Ogni volta che uso assign posso immaginare la descrizione
+di un blocco combinatorio che esegue una funzione logica degli ingressi
+che compaiono a destra dell'= per pilotare l'uscita a sinistra dell'=
+3. Logic lo uso sia negli input che negli output. Può assumere valori
+0,1,x (non inizializzato o non specificato. Se vedo x da qualche parte è sintomo
+di un problema) o z (alta impedenza). Posso usare logic anche per definire
+delle variabili interne (come variabili in qualsiasi linguaggio) utilizzate
+spesso per effettuare collegamenti interni al modulo.
+4. Non posso definire con assign due volte la stessa variabile
+(con verilog potrei, system verilog no, fortunatamente)
+5. L'ordine delle assign è del tutto irrilevante. Una riga di assign viene 
+eseguita non in base all'ordine, ma in base alla transizione dei segnali che ci sono
+a destra dell'=.
+6. Se non definisco i segnali con logic ma ne faccio un assign non ho errore ma un warning.
+Tuttavia, è sempre buona norma definirli prima.
+7. Più segnali possono essere raggruppati a formare un bus. In 
+system verilog posso rappresentare dei bus tramite vettori:
+logic [3:0] a,b; rappresenta due vettori ognuno da 4 bit. In questo caso in a[3]
+c'è il bit più a sinistra del vettore. Se faccio [0:3], ho l'ordinamento opposto. 
+Generalmente si preferisce [3:0] così nell'elemento del vettore con indice maggiore ho 
+il bit più significativo del numero. Generalmente comunque l'ordine è importante per le 
+operazioni aritmetiche come somma, prodotto e sottrazione.
+Esempio:
+La dichiarazione logic [7:0] bus_data; crea un vettore di 8 bit, in cui ogni bit può essere visto 
+come una linea del bus (che formano un bus a 8 bit). I bit in questo vettore rappresentano i singoli 
+segnali di dati che viaggiano sul bus, permettendo di trasmettere informazioni da un modulo a un altro.
+Esempio di bus a 8 bit:
+Bus a 8 Bit: Si tratta di un canale di comunicazione composto da 8 linee (o fili) che possono trasmettere 
+dati in parallelo. Queste 8 linee insieme formano un solo bus attraverso il quale puoi inviare un byte di
+informazioni.
